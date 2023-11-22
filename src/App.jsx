@@ -1,10 +1,13 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { saveTodayWord } from './redux/conf/confSlice'
+import useApp from './hooks/useApp'
 import wordArray from './constants/constants.json'
+import KeyPad from './components/Keypad'
 
 const App = () => {
   const { word, timer } = useSelector((state) => state.confState)
+  const { usedKeys } = useApp(word)
   const dispatch = useDispatch()
   useEffect(() => {
     if (word === '' && timer === 0) {
@@ -25,7 +28,8 @@ const App = () => {
   }
   return (
     <>
-      <h1>Hola mundo</h1>
+      <h1>{word}</h1>
+      <KeyPad usedKeys={usedKeys} />
     </>
   )
 }
