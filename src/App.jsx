@@ -1,21 +1,23 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { saveTodayWord } from './redux/conf/confSlice'
+import { startCountdown } from './redux/conf/countDownSlice'
 import useApp from './hooks/useApp'
 import wordArray from './constants/constants.json'
 import KeyPad from './components/Keypad'
 import Grid from './components/Grid'
-import ModalHowToPlay from './components/ModalHowToPlay'
+// import ModalHowToPlay from './components/ModalHowToPlay'
 import ModalAlert from './components/ModalAlert'
 
 const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState(true)
-  const { word, timer } = useSelector((state) => state.confState)
+  // const [isModalOpen, setIsModalOpen] = useState(true)
+  const { word } = useSelector((state) => state.confState)
+  const { time } = useSelector((state) => state.countDownState)
   const { usedKeys, guesses, currentGuess, turn, handleKeyup, isCorrect, solution } = useApp(word)
   const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch()
   useEffect(() => {
-    if (word === '' || timer === 0) {
+    if (word === '' || time === 0) {
       searchForTheWordOfTheDay()
     }
   }, [])
@@ -37,10 +39,12 @@ const App = () => {
     if (isCorrect) {
       setTimeout(() => setShowModal(true), 2000)
       window.removeEventListener('keyup', handleKeyup)
+      // dispatch(startCountdown())
     }
     if (turn > 5) {
       setTimeout(() => setShowModal(true), 2000)
       window.removeEventListener('keyup', handleKeyup)
+      // dispatch(startCountdown())
     }
 
     return () => window.removeEventListener('keyup', handleKeyup)

@@ -65,6 +65,7 @@ const useApp = (solution) => {
         console.log('you already tried that word.')
         return
       }
+      console.log('currentGuess', currentGuess)
       if (currentGuess.length !== 5) {
         console.log('word must be 5 chars.')
         return

@@ -1,3 +1,4 @@
+import CountdownTimer from './CountdownTimer'
 const ModalAlert = ({ solution, isCorrect, turn }) => {
   return (
     <div className='modal'>
@@ -13,6 +14,7 @@ const ModalAlert = ({ solution, isCorrect, turn }) => {
           <h1>No importa</h1>
           <p className='solution'>{solution}</p>
           <p>Mejor suerte la próxima vez:)</p>
+          <CountdownTimer />
         </div>
       )}
     </div>
