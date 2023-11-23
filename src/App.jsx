@@ -1,14 +1,18 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { saveTodayWord } from './redux/conf/confSlice'
 import useApp from './hooks/useApp'
 import wordArray from './constants/constants.json'
 import KeyPad from './components/Keypad'
 import Grid from './components/Grid'
+import ModalHowToPlay from './components/ModalHowToPlay'
+import ModalAlert from './components/ModalAlert'
 
 const App = () => {
+  const [isModalOpen, setIsModalOpen] = useState(true)
   const { word, timer } = useSelector((state) => state.confState)
-  const { usedKeys, guesses, currentGuess, turn, handleKeyup, isCorrect } = useApp(word)
+  const { usedKeys, guesses, currentGuess, turn, handleKeyup, isCorrect, solution } = useApp(word)
+  const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch()
   useEffect(() => {
     if (word === '' || timer === 0) {
@@ -31,22 +35,30 @@ const App = () => {
     window.addEventListener('keyup', handleKeyup)
 
     if (isCorrect) {
-      // setTimeout(() => setShowModal(true), 2000)
+      setTimeout(() => setShowModal(true), 2000)
       window.removeEventListener('keyup', handleKeyup)
     }
     if (turn > 5) {
-      // setTimeout(() => setShowModal(true), 2000)
+      setTimeout(() => setShowModal(true), 2000)
       window.removeEventListener('keyup', handleKeyup)
     }
 
     return () => window.removeEventListener('keyup', handleKeyup)
   }, [handleKeyup, isCorrect, turn])
-  console.log(word)
+  // const closeModal = () => {
+  //   setIsModalOpen(false)
+  // }
   return (
     <>
+      {/* <ModalHowToPlay isModalOpen={isModalOpen} closeModal={closeModal} /> */}
+      {showModal && <ModalAlert isCorrect={isCorrect} turn={turn} solution={solution} />}
       <h1>{word}</h1>
-      <Grid guesses={guesses} currentGuess={currentGuess} turn={turn} />
-      <KeyPad usedKeys={usedKeys} />
+      {!showModal && (
+        <>
+          <Grid guesses={guesses} currentGuess={currentGuess} turn={turn} />
+          <KeyPad usedKeys={usedKeys} />
+        </>
+      )}
     </>
   )
 }

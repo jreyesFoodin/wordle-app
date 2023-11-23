@@ -17,6 +17,7 @@ const initialState = {
     { key: 'l' },
     { key: 'm' },
     { key: 'n' },
+    { key: 'ñ' },
     { key: 'o' },
     { key: 'p' },
     { key: 'q' },
