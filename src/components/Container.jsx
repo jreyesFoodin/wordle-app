@@ -4,6 +4,7 @@ import Grid from './Grid'
 import Keypad from './Keypad'
 import useApp from '../hooks/useApp'
 import Alert from './Alert'
+import Navbar from './Navbar'
 
 const Container = ({ word, showModal, setShowModal }) => {
   const { usedKeys, guesses, currentGuess, turn, handleKeyup, isCorrect } = useApp(word)
@@ -18,7 +19,8 @@ const Container = ({ word, showModal, setShowModal }) => {
   return (
     <>
       {showModal && <ModalAlert isCorrect={isCorrect} turn={turn} solution={word} />}
-      <h1>{word}</h1>
+      {/* <h1>{word}</h1> */}
+      <Navbar title={word} />
       {!showModal && (
         <>
           <Alert />

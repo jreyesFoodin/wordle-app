@@ -33,7 +33,7 @@ const App = () => {
     dispatch(saveTodayWord(selectedWord[0]))
     dispatch(resetCountdown())
     dispatch(resetHistory())
-    dispatch(setIsModalOpen(false))
+    setShowModal(false)
   }
   const closeModal = () => {
     dispatch(setIsModalOpen(false))

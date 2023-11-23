@@ -171,3 +171,24 @@ body {
       border-color: #333;
     }
   }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;
+    color: #fff;
+    padding: 20px;
+  }
+
+  .left {
+    margin-right: auto;
+  }
+
+  .right {
+    margin-left: auto;
+  }
+
+  .titleNav {
+    text-align: center;
+  }
