@@ -9,7 +9,6 @@ const userCountDown = createSlice({
   initialState,
   reducers: {
     startCountdown: (state, action) => {
-      console.log('startCountdown')
       return { ...state, isRunning: true }
     },
     decrementTime: (state) => {
@@ -20,7 +19,6 @@ const userCountDown = createSlice({
       }
     },
     resetCountdown: (state) => {
-      console.log('resetCountdown')
       return { ...initialState }
     }
   }
