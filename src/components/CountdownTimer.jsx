@@ -11,7 +11,7 @@ const CountdownTimer = () => {
     if (isRunning && time > 0) {
       interval = setInterval(() => {
         dispatch(decrementTime())
-      }, 1000)
+      }, 1) // 1000
     }
 
     return () => {
