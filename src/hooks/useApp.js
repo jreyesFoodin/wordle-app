@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { setGuesses, setHistory, setTurn, setUsedKeys, setCurrentGuess, setIsCorrect } from '../redux/conf/historySlice'
+import { showAlert } from '../redux/conf/alertSlice'
 
 const useApp = (solution) => {
   const { guesses, turn, history, usedKeys, currentGuess, isCorrect } = useSelector((state) => state.historyState)
@@ -55,15 +56,15 @@ const useApp = (solution) => {
   const handleKeyup = ({ key }) => {
     if (key === 'Enter') {
       if (turn > 5) {
-        console.log('¡Usaste todas tus conjeturas!') // Cambiarlos a alertas
+        dispatch(showAlert({ message: '¡Usaste todas tus conjeturas!' }))
         return
       }
       if (history.includes(currentGuess)) {
-        console.log('Ya probaste esa palabra.') // Cambiarlos a alertas
+        dispatch(showAlert({ message: 'Ya probaste esa palabra.' }))
         return
       }
       if (currentGuess.length !== 5) {
-        console.log('La palabra debe tener 5 caracteres.') // Cambiarlos a alertas
+        dispatch(showAlert({ message: 'La palabra debe tener 5 caracteres.' }))
         return
       }
       const formatted = formatGuess()

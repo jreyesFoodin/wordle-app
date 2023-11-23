@@ -4,7 +4,7 @@ import { hideAlert } from '../redux/conf/alertSlice'
 
 const Alert = () => {
   const dispatch = useDispatch()
-  const { showAlert, message, alertType } = useSelector((state) => state)
+  const { showAlert, message, alertType } = useSelector((state) => state.alertState)
 
   useEffect(() => {
     let timeout
@@ -21,7 +21,9 @@ const Alert = () => {
 
   return (
     showAlert && (
-      <div className={`alert alert-${alertType}`}>
+      <div
+        className={`fixed top-0 right-0 m-4 p-4 bg-${alertType}-500 text-white rounded shadow-lg`}
+      >
         <p>{message}</p>
       </div>
     )
