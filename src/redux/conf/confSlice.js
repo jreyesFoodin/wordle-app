@@ -37,7 +37,6 @@ const userAuth = createSlice({
   initialState,
   reducers: {
     saveTodayWord: (state, action) => {
-      console.log("🚀 ~ file: confSlice.js:40 ~ action:", action)
       state.word = action.payload
     },
     resetConf: (state) => {

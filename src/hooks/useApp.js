@@ -1,18 +1,17 @@
 import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setGuesses, setHistory, setTurn, setUsedKeys } from '../redux/conf/historySlice'
 
 const useApp = (solution) => {
-  const [turn, setTurn] = useState(0)
+  const { guesses, turn, history, usedKeys } = useSelector((state) => state.historyState)
   const [currentGuess, setCurrentGuess] = useState('')
-  const [guesses, setGuesses] = useState([...Array(6)])
-  const [history, setHistory] = useState([])
   const [isCorrect, setIsCorrect] = useState(false)
-  const [usedKeys, setUsedKeys] = useState({})
+  const dispatch = useDispatch()
   const formatGuess = () => {
     const solutionArray = [...solution]
     const formattedGuess = [...currentGuess].map((l) => {
       return { key: l, color: 'grey' }
     })
-
     formattedGuess.forEach((l, i) => {
       if (solution[i] === l.key) {
         formattedGuess[i].color = 'green'
@@ -26,7 +25,6 @@ const useApp = (solution) => {
         solutionArray[solutionArray.indexOf(l.key)] = null
       }
     })
-
     return formattedGuess
   }
 
@@ -34,36 +32,26 @@ const useApp = (solution) => {
     if (currentGuess === solution) {
       setIsCorrect(true)
     }
-    setGuesses(prevGuesses => {
-      const newGuesses = [...prevGuesses]
-      newGuesses[turn] = formattedGuess
-      return newGuesses
-    })
-    setHistory(prevHistory => {
-      return [...prevHistory, currentGuess]
-    })
-    setTurn(prevTurn => {
-      return prevTurn + 1
-    })
-    setUsedKeys(prevUsedKeys => {
-      formattedGuess.forEach(l => {
-        const currentColor = prevUsedKeys[l.key]
+    dispatch(setGuesses([...guesses.slice(0, turn), formattedGuess, ...guesses.slice(turn + 1)]))
+    dispatch(setHistory([...history, currentGuess]))
+    dispatch(setTurn(turn + 1))
+    const updatedUsedKeys = { ...usedKeys }
+    formattedGuess.forEach(l => {
+      const currentColor = updatedUsedKeys[l.key]
 
-        if (l.color === 'green') {
-          prevUsedKeys[l.key] = 'green'
-          return
-        }
-        if (l.color === 'yellow' && currentColor !== 'green') {
-          prevUsedKeys[l.key] = 'yellow'
-          return
-        }
-        if (l.color === 'grey' && currentColor !== ('green' || 'yellow')) {
-          prevUsedKeys[l.key] = 'grey'
-        }
-      })
-
-      return prevUsedKeys
+      if (l.color === 'green') {
+        updatedUsedKeys[l.key] = 'green'
+        return
+      }
+      if (l.color === 'yellow' && currentColor !== 'green') {
+        updatedUsedKeys[l.key] = 'yellow'
+        return
+      }
+      if (l.color === 'grey' && currentColor !== ('green' || 'yellow')) {
+        updatedUsedKeys[l.key] = 'grey'
+      }
     })
+    dispatch(setUsedKeys(updatedUsedKeys))
     setCurrentGuess('')
   }
 
