@@ -7,6 +7,7 @@ const ModalAlert = ({ solution, isCorrect, turn }) => {
           <h1>¡Tú ganas!</h1>
           <p className='solution'>{solution}</p>
           <p>Encontraste la solución en {turn} conjeturas. :)</p>
+          <CountdownTimer />
         </div>
       )}
       {!isCorrect && (

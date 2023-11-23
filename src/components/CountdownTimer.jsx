@@ -1,13 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { decrementTime } from '../redux/conf/countDownSlice'
+import { decrementTime, startCountdown } from '../redux/conf/countDownSlice'
 
 const CountdownTimer = () => {
   const dispatch = useDispatch()
   const { time, isRunning } = useSelector((state) => state.countDownState)
   useEffect(() => {
     let interval
-
+    dispatch(startCountdown())
     if (isRunning && time > 0) {
       interval = setInterval(() => {
         dispatch(decrementTime())

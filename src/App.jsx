@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { saveTodayWord } from './redux/conf/confSlice'
-import { startCountdown } from './redux/conf/countDownSlice'
+import { resetCountdown } from './redux/conf/countDownSlice'
+import { resetHistory } from './redux/conf/historySlice'
 import useApp from './hooks/useApp'
 import wordArray from './constants/constants.json'
 import KeyPad from './components/Keypad'
@@ -32,22 +33,15 @@ const App = () => {
     const shuffledArray = shuffleArray([...wordArray])
     const selectedWord = shuffledArray.filter((word) => word.length === 5).slice(0, 1)
     dispatch(saveTodayWord(selectedWord[0]))
+    dispatch(resetCountdown())
+    dispatch(resetHistory())
   }
   useEffect(() => {
     window.addEventListener('keyup', handleKeyup)
-
-    if (isCorrect) {
-      setTimeout(() => setShowModal(true), 2000)
+    if (isCorrect || turn > 5) {
+      setTimeout(() => setShowModal(true), 1000)
       window.removeEventListener('keyup', handleKeyup)
-      console.log('=>')
-      dispatch(startCountdown())
     }
-    if (turn > 5) {
-      setTimeout(() => setShowModal(true), 2000)
-      window.removeEventListener('keyup', handleKeyup)
-      // dispatch(startCountdown())
-    }
-
     return () => window.removeEventListener('keyup', handleKeyup)
   }, [handleKeyup, isCorrect, turn])
   // const closeModal = () => {
