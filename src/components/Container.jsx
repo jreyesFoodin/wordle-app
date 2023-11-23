@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import ModalAlert from './ModalAlert'
 import Grid from './Grid'
 import Keypad from './Keypad'
 import useApp from '../hooks/useApp'
 import Alert from './Alert'
 
-const Container = ({ word }) => {
+const Container = ({ word, showModal, setShowModal }) => {
   const { usedKeys, guesses, currentGuess, turn, handleKeyup, isCorrect } = useApp(word)
-  const [showModal, setShowModal] = useState(false)
   useEffect(() => {
     window.addEventListener('keyup', handleKeyup)
     if (isCorrect || turn > 5) {

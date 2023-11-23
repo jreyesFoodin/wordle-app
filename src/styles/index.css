@@ -12,7 +12,7 @@ body {
     color: #333;
   }
   .button-active {
-    background-color: green !important;
+    background-color: #5ac85a !important;
     border: 2px solid white !important;
     border-radius: 12px 4px 8px;
     display: inline-block;

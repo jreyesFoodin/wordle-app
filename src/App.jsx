@@ -9,11 +9,12 @@ import Container from './components/Container'
 
 const App = () => {
   const { word } = useSelector((state) => state.confState)
-  const { time } = useSelector((state) => state.countDownState)
+  const { time, isRunning } = useSelector((state) => state.countDownState)
+  const [showModal, setShowModal] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(true)
   const dispatch = useDispatch()
   useEffect(() => {
-    if (word === '' || time === 0) {
+    if (word === '' || (time === 0 && !isRunning)) {
       searchForTheWordOfTheDay()
     }
   }, [time])
@@ -26,10 +27,14 @@ const App = () => {
   }
   const searchForTheWordOfTheDay = () => {
     const shuffledArray = shuffleArray([...wordArray])
-    const selectedWord = shuffledArray.filter((word) => word.length === 5).slice(0, 1)
+    const selectedWord = shuffledArray
+      .filter((word) => word.length === 5)
+      .slice(0, 1)
+      .map((word) => word.normalize('NFD').replace(/[\u0300-\u036f]/g, ''))
     dispatch(saveTodayWord(selectedWord[0]))
     dispatch(resetCountdown())
     dispatch(resetHistory())
+    setShowModal(false)
   }
   const closeModal = () => {
     setIsModalOpen(false)
@@ -37,7 +42,7 @@ const App = () => {
   return (
     <>
       {isModalOpen && <ModalHowToPlay isModalOpen={isModalOpen} closeModal={closeModal} />}
-      {!isModalOpen && <Container word={word} />}
+      {!isModalOpen && <Container word={word} showModal={showModal} setShowModal={setShowModal} />}
     </>
   )
 }
