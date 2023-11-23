@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
-  guesses: [...Array(6)],
+  guesses: [...Array(5)],
   history: [],
   turn: 0,
   usedKeys: {},

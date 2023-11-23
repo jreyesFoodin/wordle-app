@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setGuesses, setHistory, setTurn, setUsedKeys, setCurrentGuess, setIsCorrect } from '../redux/conf/historySlice'
 import { setIsModalOpen } from '../redux/conf/confSlice'
 import { showAlert } from '../redux/conf/alertSlice'
+import { maxCurrentGuess, maxTurn, maximumCharacterError, newWordAlert, noMoreChancesAlert } from '../constants/Option'
 
 const useApp = (solution) => {
   const { guesses, turn, history, usedKeys, currentGuess, isCorrect } = useSelector((state) => state.historyState)
@@ -37,7 +38,6 @@ const useApp = (solution) => {
     const updatedUsedKeys = { ...usedKeys }
     formattedGuess.forEach(l => {
       const currentColor = updatedUsedKeys[l.key]
-
       if (l.color === 'green') {
         updatedUsedKeys[l.key] = 'green'
         return
@@ -56,16 +56,16 @@ const useApp = (solution) => {
 
   const handleKeyup = ({ key }) => {
     if (key === 'Enter') {
-      if (turn > 5) {
-        dispatch(showAlert({ message: '¡Usaste todas tus conjeturas!' }))
+      if (turn > maxTurn) {
+        dispatch(showAlert({ message: noMoreChancesAlert }))
         return
       }
       if (history.includes(currentGuess)) {
-        dispatch(showAlert({ message: 'Ya probaste esa palabra.' }))
+        dispatch(showAlert({ message: newWordAlert }))
         return
       }
-      if (currentGuess.length !== 5) {
-        dispatch(showAlert({ message: 'La palabra debe tener 5 caracteres.' }))
+      if (currentGuess.length !== maxCurrentGuess) {
+        dispatch(showAlert({ message: maximumCharacterError }))
         return
       }
       const formatted = formatGuess()
@@ -76,7 +76,7 @@ const useApp = (solution) => {
       return
     }
     if (/^[A-Za-z]$/.test(key)) {
-      if (currentGuess.length < 5) {
+      if (currentGuess.length < maxCurrentGuess) {
         dispatch(setCurrentGuess(currentGuess + key))
       }
     }

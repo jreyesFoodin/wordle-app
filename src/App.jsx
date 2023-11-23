@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { saveTodayWord, setIsModalOpen, setModalControl } from './redux/conf/confSlice'
+import { maxCurrentGuess } from './constants/Option'
 import wordArray from './constants/constants.json'
 import ModalHowToPlay from './components/ModalHowToPlay'
 import Container from './components/Container'
@@ -24,7 +25,7 @@ const App = () => {
     dispatch(setModalControl(false))
     const shuffledArray = shuffleArray([...wordArray])
     const selectedWord = shuffledArray
-      .filter((word) => word.length === 5)
+      .filter((word) => word.length === maxCurrentGuess)
       .slice(0, 1)
       .map((word) => word.normalize('NFD').replace(/[\u0300-\u036f]/g, ''))
     dispatch(saveTodayWord(selectedWord[0]))
