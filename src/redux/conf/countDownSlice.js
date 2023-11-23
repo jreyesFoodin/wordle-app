@@ -15,7 +15,7 @@ const userCountDown = createSlice({
       return { ...state, time: state.time - 1 }
     },
     resetCountdown: (state) => {
-      return initialState
+      return { ...state, isRunning: false, time: 300 }
     }
   }
 })

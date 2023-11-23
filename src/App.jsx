@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { saveTodayWord } from './redux/conf/confSlice'
+import { saveTodayWord, setIsModalOpen } from './redux/conf/confSlice'
 import { resetCountdown } from './redux/conf/countDownSlice'
 import { resetHistory } from './redux/conf/historySlice'
 import wordArray from './constants/constants.json'
@@ -8,13 +8,12 @@ import ModalHowToPlay from './components/ModalHowToPlay'
 import Container from './components/Container'
 
 const App = () => {
-  const { word } = useSelector((state) => state.confState)
-  const { time, isRunning } = useSelector((state) => state.countDownState)
+  const { word, isModalOpen } = useSelector((state) => state.confState)
+  const { time } = useSelector((state) => state.countDownState)
   const [showModal, setShowModal] = useState(false)
-  const [isModalOpen, setIsModalOpen] = useState(true)
   const dispatch = useDispatch()
   useEffect(() => {
-    if (word === '' || (time === 0 && !isRunning)) {
+    if (word === '' || (time === 0)) {
       searchForTheWordOfTheDay()
     }
   }, [time])
@@ -34,10 +33,10 @@ const App = () => {
     dispatch(saveTodayWord(selectedWord[0]))
     dispatch(resetCountdown())
     dispatch(resetHistory())
-    setShowModal(false)
+    dispatch(setIsModalOpen(false))
   }
   const closeModal = () => {
-    setIsModalOpen(false)
+    dispatch(setIsModalOpen(false))
   }
   return (
     <>

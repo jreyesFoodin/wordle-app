@@ -29,7 +29,8 @@ const initialState = {
     { key: 'x' },
     { key: 'y' },
     { key: 'z' }
-  ]
+  ],
+  isModalOpen: true
 }
 
 const userConf = createSlice({
@@ -39,11 +40,14 @@ const userConf = createSlice({
     saveTodayWord: (state, action) => {
       state.word = action.payload
     },
+    setIsModalOpen: (state, action) => {
+      state.isModalOpen = action.payload
+    },
     resetConf: (state) => {
       return initialState
     }
   }
 })
 
-export const { saveTodayWord, resetConf } = userConf.actions
+export const { saveTodayWord, setIsModalOpen, resetConf } = userConf.actions
 export default userConf.reducer
