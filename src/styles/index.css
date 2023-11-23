@@ -176,8 +176,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #333;
-    color: #fff;
+    background: #fff;
+    color: #333;
     padding: 20px;
   }
 
@@ -191,4 +191,5 @@ body {
 
   .titleNav {
     text-align: center;
+    font-size: 29px;
   }

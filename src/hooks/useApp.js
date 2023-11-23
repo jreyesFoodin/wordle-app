@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { setGuesses, setHistory, setTurn, setUsedKeys, setCurrentGuess, setIsCorrect } from '../redux/conf/historySlice'
+import { setIsModalOpen } from '../redux/conf/confSlice'
 import { showAlert } from '../redux/conf/alertSlice'
 
 const useApp = (solution) => {
@@ -80,8 +81,11 @@ const useApp = (solution) => {
       }
     }
   }
+  const handledModal = () => {
+    dispatch(setIsModalOpen(true))
+  }
 
-  return { turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup }
+  return { turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup, handledModal }
 }
 
 export default useApp

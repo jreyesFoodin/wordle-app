@@ -7,7 +7,7 @@ import Alert from './Alert'
 import Navbar from './Navbar'
 
 const Container = ({ word, showModal, setShowModal }) => {
-  const { usedKeys, guesses, currentGuess, turn, handleKeyup, isCorrect } = useApp(word)
+  const { usedKeys, guesses, currentGuess, turn, handleKeyup, isCorrect, handledModal } = useApp(word)
   useEffect(() => {
     window.addEventListener('keyup', handleKeyup)
     if (isCorrect || turn > 5) {
@@ -20,7 +20,7 @@ const Container = ({ word, showModal, setShowModal }) => {
     <>
       {showModal && <ModalAlert isCorrect={isCorrect} turn={turn} solution={word} />}
       {/* <h1>{word}</h1> */}
-      <Navbar title={word} />
+      <Navbar title={word} handledModal={handledModal} />
       {!showModal && (
         <>
           <Alert />

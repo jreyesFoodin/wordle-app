@@ -1,9 +1,9 @@
 import FaIconLeft from './icons/FaIconLeft'
-const Navbar = ({ title }) => {
+const Navbar = ({ title, handledModal }) => {
   return (
     <div className='navbar'>
       <div className='left'>
-        <FaIconLeft />
+        <FaIconLeft handledModal={handledModal} />
       </div>
       <div className='titleNav'>
         <p>{title}</p>
