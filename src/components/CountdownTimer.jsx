@@ -1,19 +1,32 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { decrementTime, startCountdown } from '../redux/conf/countDownSlice'
+import { decrementTime, startCountdown, resetCountdown } from '../redux/conf/countDownSlice'
+import { resetHistory } from '../redux/conf/historySlice'
+import { resetTodayWord, setShowModal } from '../redux/conf/confSlice'
 
 const CountdownTimer = () => {
   const dispatch = useDispatch()
   const { time, isRunning } = useSelector((state) => state.countDownState)
+  const { isCorrect, turn } = useSelector((state) => state.historyState)
   useEffect(() => {
     let interval
-    dispatch(startCountdown())
     if (isRunning && time > 0) {
       interval = setInterval(() => {
         dispatch(decrementTime())
       }, 1000)
     }
-
+    const handleTimeZero = async () => {
+      if (isRunning && time === 0) {
+        await dispatch(resetHistory())
+        await dispatch(resetTodayWord())
+        await dispatch(resetCountdown())
+        await dispatch(setShowModal(false))
+      }
+    }
+    handleTimeZero()
+    if (isCorrect || turn > 5) {
+      dispatch(startCountdown())
+    }
     return () => {
       clearInterval(interval)
     }

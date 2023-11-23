@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
-  time: 300, // 5 minutes in seconds
+  time: 10, // 300 segundos
   isRunning: false
 }
 
@@ -9,13 +9,19 @@ const userCountDown = createSlice({
   initialState,
   reducers: {
     startCountdown: (state, action) => {
+      console.log('startCountdown')
       return { ...state, isRunning: true }
     },
     decrementTime: (state) => {
-      return { ...state, time: state.time - 1 }
+      if (state.time - 1 <= 0) {
+        return { ...state, isRunning: false, time: 0 }
+      } else {
+        return { ...state, time: state.time - 1 }
+      }
     },
     resetCountdown: (state) => {
-      return { ...state, isRunning: false, time: 300 }
+      console.log('resetCountdown')
+      return { ...initialState }
     }
   }
 })
