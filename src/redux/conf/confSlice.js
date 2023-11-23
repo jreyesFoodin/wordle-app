@@ -33,7 +33,7 @@ const initialState = {
   ]
 }
 
-const userAuth = createSlice({
+const userConf = createSlice({
   name: 'conf',
   initialState,
   reducers: {
@@ -46,5 +46,5 @@ const userAuth = createSlice({
   }
 })
 
-export const { saveTodayWord, resetConf } = userAuth.actions
-export default userAuth.reducer
+export const { saveTodayWord, resetConf } = userConf.actions
+export default userConf.reducer

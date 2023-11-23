@@ -6,7 +6,7 @@ const initialState = {
   usedKeys: {}
 }
 
-const userAuth = createSlice({
+const userHistory = createSlice({
   name: 'history',
   initialState,
   reducers: {
@@ -28,5 +28,5 @@ const userAuth = createSlice({
   }
 })
 
-export const { setGuesses, setHistory, setTurn, setUsedKeys, resetHistory } = userAuth.actions
-export default userAuth.reducer
+export const { setGuesses, setHistory, setTurn, setUsedKeys, resetHistory } = userHistory.actions
+export default userHistory.reducer
