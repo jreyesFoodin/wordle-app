@@ -39,7 +39,8 @@ const App = () => {
     if (isCorrect) {
       setTimeout(() => setShowModal(true), 2000)
       window.removeEventListener('keyup', handleKeyup)
-      // dispatch(startCountdown())
+      console.log('=>')
+      dispatch(startCountdown())
     }
     if (turn > 5) {
       setTimeout(() => setShowModal(true), 2000)

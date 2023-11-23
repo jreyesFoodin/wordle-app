@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { startCountdown, decrementTime, resetCountdown } from '../redux/conf/countDownSlice'
+import { decrementTime } from '../redux/conf/countDownSlice'
 
 const CountdownTimer = () => {
   const dispatch = useDispatch()
@@ -18,15 +18,6 @@ const CountdownTimer = () => {
       clearInterval(interval)
     }
   }, [dispatch, isRunning, time])
-
-  //   const handleStart = () => {
-  //     dispatch(startCountdown())
-  //   }
-
-  //   const handleReset = () => {
-  //     dispatch(resetCountdown())
-  //   }
-
   const formatTime = () => {
     const minutes = Math.floor(time / 60)
     const seconds = time % 60

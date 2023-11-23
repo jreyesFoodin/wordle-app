@@ -3,7 +3,9 @@ const initialState = {
   guesses: [...Array(6)],
   history: [],
   turn: 0,
-  usedKeys: {}
+  usedKeys: {},
+  currentGuess: '',
+  isCorrect: false
 }
 
 const userHistory = createSlice({
@@ -22,11 +24,17 @@ const userHistory = createSlice({
     setUsedKeys: (state, action) => {
       state.usedKeys = action.payload
     },
+    setCurrentGuess: (state, action) => {
+      state.currentGuess = action.payload
+    },
+    setIsCorrect: (state, action) => {
+      state.isCorrect = action.payload
+    },
     resetHistory: (state) => {
       return initialState
     }
   }
 })
 
-export const { setGuesses, setHistory, setTurn, setUsedKeys, resetHistory } = userHistory.actions
+export const { setGuesses, setHistory, setTurn, setUsedKeys, setCurrentGuess, setIsCorrect, resetHistory } = userHistory.actions
 export default userHistory.reducer

@@ -1,11 +1,8 @@
-import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setGuesses, setHistory, setTurn, setUsedKeys } from '../redux/conf/historySlice'
+import { setGuesses, setHistory, setTurn, setUsedKeys, setCurrentGuess, setIsCorrect } from '../redux/conf/historySlice'
 
 const useApp = (solution) => {
-  const { guesses, turn, history, usedKeys } = useSelector((state) => state.historyState)
-  const [currentGuess, setCurrentGuess] = useState('')
-  const [isCorrect, setIsCorrect] = useState(false)
+  const { guesses, turn, history, usedKeys, currentGuess, isCorrect } = useSelector((state) => state.historyState)
   const dispatch = useDispatch()
   const formatGuess = () => {
     const solutionArray = [...solution]
@@ -30,7 +27,7 @@ const useApp = (solution) => {
 
   const addNewGuess = (formattedGuess) => {
     if (currentGuess === solution) {
-      setIsCorrect(true)
+      dispatch(setIsCorrect(true))
     }
     dispatch(setGuesses([...guesses.slice(0, turn), formattedGuess, ...guesses.slice(turn + 1)]))
     dispatch(setHistory([...history, currentGuess]))
@@ -52,34 +49,33 @@ const useApp = (solution) => {
       }
     })
     dispatch(setUsedKeys(updatedUsedKeys))
-    setCurrentGuess('')
+    dispatch(setCurrentGuess(''))
   }
 
   const handleKeyup = ({ key }) => {
     if (key === 'Enter') {
       if (turn > 5) {
-        console.log('you used all your guesses!')
+        console.log('¡Usaste todas tus conjeturas!') // Cambiarlos a alertas
         return
       }
       if (history.includes(currentGuess)) {
-        console.log('you already tried that word.')
+        console.log('Ya probaste esa palabra.') // Cambiarlos a alertas
         return
       }
-      console.log('currentGuess', currentGuess)
       if (currentGuess.length !== 5) {
-        console.log('word must be 5 chars.')
+        console.log('La palabra debe tener 5 caracteres.') // Cambiarlos a alertas
         return
       }
       const formatted = formatGuess()
       addNewGuess(formatted)
     }
     if (key === 'Backspace') {
-      setCurrentGuess(prev => prev.slice(0, -1))
+      dispatch(setCurrentGuess(currentGuess.slice(0, -1)))
       return
     }
     if (/^[A-Za-z]$/.test(key)) {
       if (currentGuess.length < 5) {
-        setCurrentGuess(prev => prev + key)
+        dispatch(setCurrentGuess(currentGuess + key))
       }
     }
   }
