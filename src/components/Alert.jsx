@@ -21,9 +21,7 @@ const Alert = () => {
 
   return (
     showAlert && (
-      <div
-        className={`fixed top-0 right-0 m-4 p-4 bg-${alertType}-500 text-white rounded shadow-lg`}
-      >
+      <div className={`alert ${alertType}`}>
         <p>{message}</p>
       </div>
     )

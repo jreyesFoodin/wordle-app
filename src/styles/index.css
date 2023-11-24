@@ -211,3 +211,26 @@ body {
   .victories:hover {
     background-color: #eee;
   }
+
+  .alert {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: white;
+  }
+  
+  .alert.success {
+    background-color: #4caf50;
+  }
+  
+  .alert.error {
+    background-color: #f44336;
+  }
+  
+  .warning {
+    background-color: #ff9800;
+  }

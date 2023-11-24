@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   showAlert: false,
   message: '',
-  alertType: 'info'
+  alertType: 'warning'
 }
 
 const userAlert = createSlice({
@@ -13,7 +13,7 @@ const userAlert = createSlice({
       return {
         showAlert: true,
         message: action.payload.message,
-        alertType: action.payload.alertType || 'info'
+        alertType: action.payload.alertType || 'warning'
       }
     },
     hideAlert: (state) => {
