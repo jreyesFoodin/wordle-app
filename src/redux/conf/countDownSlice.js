@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
-  time: 10, // 300 segundos
+  time: 300,
   isRunning: false
 }
 
