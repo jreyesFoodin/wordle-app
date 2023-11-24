@@ -12,6 +12,7 @@ const Container = ({ word }) => {
   const dispatch = useDispatch()
   const { isCorrect, turn } = useSelector((state) => state.historyState)
   const { showModal, modalControl } = useSelector((state) => state.confState)
+  const { wins } = useSelector((state) => state.winsState)
   const { usedKeys, guesses, currentGuess, handleKeyup, handledModal } = useApp(word)
   useEffect(() => {
     window.addEventListener('keyup', handleKeyup)
@@ -26,7 +27,7 @@ const Container = ({ word }) => {
   }, [handleKeyup, isCorrect, turn])
   return (
     <>
-      {showModal && <ModalAlert isCorrect={isCorrect} turn={turn} solution={word} />}
+      {showModal && <ModalAlert isCorrect={isCorrect} turn={turn} solution={word} wins={wins} />}
       <Navbar title={word} handledModal={handledModal} />
       {!showModal && (
         <>

@@ -193,3 +193,21 @@ body {
     text-align: center;
     font-size: 29px;
   }
+
+
+  .containerWins {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  
+  .plays,
+  .victories {
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .plays:hover,
+  .victories:hover {
+    background-color: #eee;
+  }

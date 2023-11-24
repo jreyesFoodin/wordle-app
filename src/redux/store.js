@@ -6,18 +6,20 @@ import confReducer from './conf/confSlice'
 import historyReducer from './conf/historySlice'
 import countDownReducer from './conf/countDownSlice'
 import alertReducer from './conf/alertSlice'
+import winsReducer from './conf/winsSlice'
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['confState', 'historyState', 'countDownState', 'alertState']
+  whitelist: ['confState', 'historyState', 'countDownState', 'alertState', 'winsState']
 }
 
 const rootReducer = combineReducers({
   confState: confReducer,
   historyState: historyReducer,
   countDownState: countDownReducer,
-  alertState: alertReducer
+  alertState: alertReducer,
+  winsState: winsReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

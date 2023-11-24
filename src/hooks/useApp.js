@@ -2,11 +2,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setGuesses, setHistory, setTurn, setUsedKeys, setCurrentGuess, setIsCorrect } from '../redux/conf/historySlice'
 import { setIsModalOpen } from '../redux/conf/confSlice'
 import { showAlert } from '../redux/conf/alertSlice'
+import { setWins } from '../redux/conf/winsSlice'
 import { maxCurrentGuess, maxTurn } from '../constants/Option'
 import { maximumCharacterError, newWordAlert, noMoreChancesAlert } from '../constants/message'
 
 const useApp = (solution) => {
   const { guesses, turn, history, usedKeys, currentGuess, isCorrect } = useSelector((state) => state.historyState)
+  const { wins } = useSelector((state) => state.winsState)
   const dispatch = useDispatch()
   const formatGuess = () => {
     const solutionArray = [...solution]
@@ -32,6 +34,7 @@ const useApp = (solution) => {
   const addNewGuess = (formattedGuess) => {
     if (currentGuess === solution) {
       dispatch(setIsCorrect(true))
+      dispatch(setWins(wins + 1))
     }
     dispatch(setGuesses([...guesses.slice(0, turn), formattedGuess, ...guesses.slice(turn + 1)]))
     dispatch(setHistory([...history, currentGuess]))
