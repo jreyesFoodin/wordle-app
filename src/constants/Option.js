@@ -1,4 +1,4 @@
-module.exports = {
-  maxCurrentGuess: 5,
-  maxTurn: 5
-}
+const maxCurrentGuess = 5
+const maxTurn = 5
+
+export { maxCurrentGuess, maxTurn }

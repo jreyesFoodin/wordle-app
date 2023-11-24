@@ -6,7 +6,7 @@ const Keypad = ({ usedKeys }) => {
       {letters && letters.map(l => {
         const color = usedKeys[l.key]
         return (
-          <div key={l.key} className={color}>{l.key}</div>
+          <div key={l.key} className={color} onClick={() => console.log(l.key)}>{l.key}</div>
         )
       })}
     </div>

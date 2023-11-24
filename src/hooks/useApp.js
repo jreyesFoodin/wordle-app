@@ -2,7 +2,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setGuesses, setHistory, setTurn, setUsedKeys, setCurrentGuess, setIsCorrect } from '../redux/conf/historySlice'
 import { setIsModalOpen } from '../redux/conf/confSlice'
 import { showAlert } from '../redux/conf/alertSlice'
-import { maxCurrentGuess, maxTurn, maximumCharacterError, newWordAlert, noMoreChancesAlert } from '../constants/Option'
+import { maxCurrentGuess, maxTurn } from '../constants/Option'
+import { maximumCharacterError, newWordAlert, noMoreChancesAlert } from '../constants/message'
 
 const useApp = (solution) => {
   const { guesses, turn, history, usedKeys, currentGuess, isCorrect } = useSelector((state) => state.historyState)
