@@ -22,7 +22,7 @@ const initialState = {
     { key: 'K' },
     { key: 'L' },
     { key: 'Ñ' },
-    { key: 'ENTER' },
+    { key: 'Enter' },
     { key: 'Z' },
     { key: 'X' },
     { key: 'C' },
@@ -30,7 +30,7 @@ const initialState = {
     { key: 'B' },
     { key: 'N' },
     { key: 'M' },
-    { key: '<=' }
+    { key: 'Backspace' }
   ],
   isModalOpen: true,
   showModal: false,

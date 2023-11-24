@@ -32,7 +32,7 @@ const Container = ({ word }) => {
         <>
           <Alert />
           <Grid guesses={guesses} currentGuess={currentGuess} turn={turn} />
-          <Keypad usedKeys={usedKeys} />
+          <Keypad usedKeys={usedKeys} handleKeyup={handleKeyup} />
         </>
       )}
     </>
