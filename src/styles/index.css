@@ -223,11 +223,11 @@ body {
     color: white;
   }
   
-  .alert.success {
+  .success {
     background-color: #4caf50;
   }
   
-  .alert.error {
+  .error {
     background-color: #f44336;
   }
   
