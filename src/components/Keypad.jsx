@@ -7,7 +7,7 @@ const Keypad = ({ usedKeys, handleKeyup }) => {
         const color = usedKeys[l.key]
         const obj = { key: l.key }
         return (
-          <div key={l.key} className={color} onClick={() => handleKeyup(obj)}>{l.key}</div>
+          <div key={l.key} className={color} onClick={() => handleKeyup(obj)}>{l.label}</div>
         )
       })}
     </div>
