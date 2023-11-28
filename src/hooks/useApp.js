@@ -68,7 +68,7 @@ const useApp = (solution) => {
         dispatch(showAlert({ message: newWordAlert }))
         return
       }
-      if (currentGuess.length !== maxCurrentGuess) {
+      if (currentGuess?.length !== maxCurrentGuess) {
         dispatch(showAlert({ message: maximumCharacterError }))
         return
       }
@@ -80,7 +80,7 @@ const useApp = (solution) => {
       return
     }
     if (/^[A-Za-z]$/.test(key)) {
-      if (currentGuess.length < maxCurrentGuess) {
+      if (currentGuess?.length < maxCurrentGuess) {
         dispatch(setCurrentGuess(currentGuess + key))
       }
     }
